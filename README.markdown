@@ -1,4 +1,4 @@
-# gmail-xoauth
+# gmail_xoauth
 
 Get access to [Gmail IMAP and STMP via OAuth](http://code.google.com/apis/gmail/oauth), using the standard Ruby Net libraries.
 
@@ -6,7 +6,7 @@ The gem only supports 3-legged OAuth. If you need [2-legged OAuth feel](http://c
 
 ## Install
 
-    $ gem install gmail-xoauth
+    $ gem install gmail_xoauth
 
 ## Usage
 
