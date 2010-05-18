@@ -17,6 +17,8 @@ tmtags
 coverage
 rdoc
 pkg
+*.gemspec
+*.gem
 
 ## PROJECT::SPECIFIC
 test/valid_credentials.yml
