@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/nfo/gmail_xoauth"
     gem.authors = ["Nicolas Fouch\303\251"]
     gem.add_dependency "oauth", ">= 0.3.6"
+    gem.add_development_dependency "shoulda", ">= 0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
