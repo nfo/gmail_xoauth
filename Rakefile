@@ -4,14 +4,12 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "gmail-xoauth"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.name = "gmail_xoauth"
+    gem.summary = %Q{Get access to Gmail IMAP and STMP via OAuth, using the standard Ruby Net libraries}
+    gem.description = %Q{Get access to Gmail IMAP and STMP via OAuth, using the standard Ruby Net libraries}
     gem.email = "nicolas@silentale.com"
-    gem.homepage = "http://github.com/nfo/gmail-xoauth"
-    gem.authors = ["Nicolas Fouché"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.homepage = "http://github.com/nfo/gmail_xoauth"
+    gem.authors = ["Nicolas Fouch\303\251"]
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
