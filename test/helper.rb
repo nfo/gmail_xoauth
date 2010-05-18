@@ -11,6 +11,16 @@ require 'gmail_xoauth'
 # Wanna debug ? Activate the IMAP debug mode, it will show the client/server conversation
 # Net::IMAP.debug = true
 
+# SMTP debugging can only be enabled on Net::SMTP instances
+# Net::SMTP.class_eval do
+#   def initialize_with_debug(*args)
+#     initialize_without_debug(*args)
+#     @debug_output = STDERR
+#   end
+#   alias_method :initialize_without_debug, :initialize
+#   alias_method :initialize, :initialize_with_debug
+# end
+
 VALID_CREDENTIALS = begin
   YAML.load_file(File.join(File.dirname(__FILE__), 'valid_credentials.yml'))
 rescue Errno::ENOENT

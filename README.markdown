@@ -35,7 +35,21 @@ Note that the [Net::IMAP#login](http://www.ruby-doc.org/core/classes/Net/IMAP.ht
 
 ### SMTP
 
-[wip]
+For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
+
+    require 'gmail_xoauth'
+    smtp = Net::SMTP.new('smtp.gmail.com', 587)
+    smtp.enable_starttls_auto
+    secret = {
+      :consumer_key => 'anonymous',
+      :consumer_secret => 'anonymous',
+      :token => '4/nM2QAaunKUINb4RrXPC55F-mix_k',
+      :token_secret => '41r18IyXjIvuyabS/NDyW6+m'
+    }
+    smtp.start('gmail.com', 'myemail@gmail.com', secret, :xoauth)
+    smtp.finish
+
+Note that +Net::SMTP#enable_starttls_auto+ is not defined in Ruby 1.8.6.
 
 ## Compatibility
 
