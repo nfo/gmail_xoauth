@@ -53,4 +53,4 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## Copyright
 
-Copyright (c) 2010 Nicolas Fouché - Silentale. See LICENSE for details.
+Copyright (c) 2010 Silentale SAS. See LICENSE for details.
