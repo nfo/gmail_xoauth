@@ -1,0 +1,1 @@
+require 'gmail_xoauth/imap_xoauth_authenticator'

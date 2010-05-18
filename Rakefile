@@ -10,6 +10,7 @@ begin
     gem.email = "nicolas@silentale.com"
     gem.homepage = "http://github.com/nfo/gmail_xoauth"
     gem.authors = ["Nicolas Fouch\303\251"]
+    gem.add_dependency "oauth", ">= 0.3.6"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
@@ -45,7 +46,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "gmail-xoauth #{version}"
+  rdoc.title = "gmail_xoauth #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
