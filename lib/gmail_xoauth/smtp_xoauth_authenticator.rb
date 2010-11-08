@@ -7,13 +7,13 @@ module GmailXoauth
     def auth_xoauth(user, secret)
       check_auth_args user, secret
       
-      request_url, oauth_string = nil
+      request_url  = "https://mail.google.com/mail/b/#{user}/smtp/"
+
       if secret[:two_legged]
-        request_url = "https://mail.google.com/mail/b/#{user}/smtp/?xoauth_requestor_id=#{CGI.escape(user)}";
+        request_url += "?xoauth_requestor_id=#{CGI.escape(user)}";
 				secret = secret.merge({:xoauth_requestor_id => user})
-      else
-        request_url  = "https://mail.google.com/mail/b/#{user}/smtp/"
       end
+
       oauth_string = build_oauth_string(request_url, secret)
 
       sasl_client_request = build_sasl_client_request(request_url, oauth_string)
