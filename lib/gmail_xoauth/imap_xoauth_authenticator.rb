@@ -15,7 +15,8 @@ module GmailXoauth
     def initialize(user, password)
 			if password[:two_legged]
 				@request_url = "https://mail.google.com/mail/b/#{user}/imap/?xoauth_requestor_id=#{CGI.escape(user)}";
-				@oauth_string = build_2_legged_oauth_string(@request_url, user, password)
+				password[:xoauth_requestor_id] = user
+				@oauth_string = build_2_legged_oauth_string(@request_url, password)
 			else
 				@request_url = "https://mail.google.com/mail/b/#{user}/imap/";
 				@oauth_string = build_oauth_string(@request_url, password)

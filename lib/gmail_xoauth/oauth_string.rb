@@ -42,7 +42,7 @@ module GmailXoauth
       oauth_request_params.map { |k,v| "#{k}=\"#{OAuth::Helper.escape(v)}\"" }.sort.join(',')
     end
 
-    def build_2_legged_oauth_string(request_url, user, oauth_params = {})
+    def build_2_legged_oauth_string(request_url, oauth_params = {})
       oauth_request_params = {
         "oauth_consumer_key"     => oauth_params[:consumer_key],
         'oauth_nonce'            => OAuth::Helper.generate_key,
@@ -54,7 +54,7 @@ module GmailXoauth
       request = OAuth::RequestProxy.proxy(
          'method'     => 'GET',
          'uri'        => request_url,
-         'parameters' => oauth_request_params.merge({"xoauth_requestor_id" => user})
+         'parameters' => oauth_request_params.merge({"xoauth_requestor_id" => oauth_params[:xoauth_requestor_id]})
       )
       
       oauth_request_params['oauth_signature'] =
