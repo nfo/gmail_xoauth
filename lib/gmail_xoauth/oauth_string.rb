@@ -41,6 +41,31 @@ module GmailXoauth
       # Inspired from OAuth::RequestProxy::Base#oauth_header
       oauth_request_params.map { |k,v| "#{k}=\"#{OAuth::Helper.escape(v)}\"" }.sort.join(',')
     end
+
+    def build_2_legged_oauth_string(request_url, user, oauth_params = {})
+      oauth_request_params = {
+        "oauth_consumer_key"     => oauth_params[:consumer_key],
+        'oauth_nonce'            => OAuth::Helper.generate_key,
+        "oauth_signature_method" => 'HMAC-SHA1',
+        'oauth_timestamp'        => OAuth::Helper.generate_timestamp,
+        'oauth_version'          => '1.0',
+      }
+      
+      request = OAuth::RequestProxy.proxy(
+         'method'     => 'GET',
+         'uri'        => request_url,
+         'parameters' => oauth_request_params.merge({"xoauth_requestor_id" => user})
+      )
+      
+      oauth_request_params['oauth_signature'] =
+        OAuth::Signature.sign(
+          request,
+          :consumer_secret => oauth_params[:consumer_secret]
+        )
+      
+      # Inspired from OAuth::RequestProxy::Base#oauth_header
+			oauth_request_params.map { |k,v| "#{k}=\"#{OAuth::Helper.escape(v)}\"" }.sort.join(',')
+    end
     
     # See http://code.google.com/apis/gmail/oauth/protocol.html#sasl
     def build_sasl_client_request(request_url, oauth_string)

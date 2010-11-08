@@ -43,6 +43,25 @@ class TestOauthString < Test::Unit::TestCase
     )
   end
   
+  def test_build_2_legged_oauth_string_should_accept_custom_consumer
+    OAuth::Helper.stubs(:generate_key).returns('abc')
+    OAuth::Helper.stubs(:generate_timestamp).returns(1274215474)
+    
+		request_url = "https://mail.google.com/mail/b/user_name@gmail.com/imap/?xoauth_requestor_id=user_name%40gmail.com";
+    oauth_params = {
+			:two_legged => true,
+      :consumer_key => 'c',
+      :consumer_secret => 'd',
+    }
+    
+    oauth_string = C.new.__send__('build_2_legged_oauth_string', request_url, "user_name@gmail.com", oauth_params)
+    
+    assert_equal(
+			'oauth_consumer_key="c",oauth_nonce="abc",oauth_signature="eG6PG7Q%2BPbI%2FNeLLCZ9PvlB%2BUjg%3D",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1274215474",oauth_version="1.0"',
+      oauth_string
+    )
+	end
+
   def test_build_sasl_client_request
     assert_equal 'GET 1 2', C.new.__send__('build_sasl_client_request', '1', '2')
   end
