@@ -10,12 +10,11 @@ module GmailXoauth
       request_url, oauth_string = nil
       if secret[:two_legged]
         request_url = "https://mail.google.com/mail/b/#{user}/smtp/?xoauth_requestor_id=#{CGI.escape(user)}";
-        secret[:xoauth_requestor_id] = user
-        oauth_string = build_2_legged_oauth_string(request_url, secret)
+				secret = secret.merge({:xoauth_requestor_id => user})
       else
         request_url  = "https://mail.google.com/mail/b/#{user}/smtp/"
-        oauth_string = build_oauth_string(request_url, secret)
       end
+      oauth_string = build_oauth_string(request_url, secret)
 
       sasl_client_request = build_sasl_client_request(request_url, oauth_string)
       
