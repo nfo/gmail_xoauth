@@ -13,14 +13,14 @@ module GmailXoauth
     # +user+ is an email address: roger@gmail.com
     # +password+ is a hash of oauth parameters, see +build_oauth_string+
     def initialize(user, password)
-			@request_url = "https://mail.google.com/mail/b/#{user}/imap/";
+      @request_url = "https://mail.google.com/mail/b/#{user}/imap/";
 
-			if password[:two_legged]
-				password = password.merge({:xoauth_requestor_id => user})
-				@request_url += "?xoauth_requestor_id=#{CGI.escape(user)}";
-			end
+      if password[:two_legged]
+        password = password.merge({:xoauth_requestor_id => user})
+        @request_url += "?xoauth_requestor_id=#{CGI.escape(user)}";
+      end
 
-			@oauth_string = build_oauth_string(@request_url, password)
+      @oauth_string = build_oauth_string(@request_url, password)
     end
     
     include OauthString

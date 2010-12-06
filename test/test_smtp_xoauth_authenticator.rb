@@ -34,7 +34,7 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
       smtp.start('gmail.com', VALID_CREDENTIALS[:email], secret, :xoauth)
     end
   ensure
-    smtp.finish if smtp
+    smtp.finish if smtp.started?
   end
 
   def test_2_legged_authenticate_with_invalid_credentials
@@ -61,6 +61,6 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
       smtp.start('gmail.com', VALID_CREDENTIALS[:email], secret, :xoauth)
     end
   ensure
-    smtp.finish if smtp
+    smtp.finish if smtp.started?
   end
 end

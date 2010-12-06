@@ -42,9 +42,9 @@ class TestImapXoauthAuthenticator < Test::Unit::TestCase
     imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
     assert_raise(Net::IMAP::NoResponseError) do
       imap.authenticate('XOAUTH', 'roger@moore.com',
-				:two_legged => true,
-				:consumer_key => 'a',
-      	:consumer_secret => 'b'
+        :two_legged => true,
+        :consumer_key => 'a',
+        :consumer_secret => 'b'
       )
     end
   end
@@ -54,7 +54,7 @@ class TestImapXoauthAuthenticator < Test::Unit::TestCase
     
     imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
     imap.authenticate('XOAUTH', VALID_CREDENTIALS[:email],
-			:two_legged => true,
+      :two_legged => true,
       :consumer_key => VALID_CREDENTIALS[:consumer_key],
       :consumer_secret => VALID_CREDENTIALS[:consumer_secret]
     )
