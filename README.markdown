@@ -2,7 +2,9 @@
 
 Get access to [Gmail IMAP and STMP via OAuth](http://code.google.com/apis/gmail/oauth), using the standard Ruby Net libraries.
 
-The gem only supports 3-legged OAuth. If you need [2-legged OAuth feel](http://code.google.com/apis/accounts/docs/OAuth.html) free to fork!
+The gem supports 3-legged and 2-legged OAuth.
+
+Note: 2-legged OAuth support was coded by [Wojciech Kruszewski](https://github.com/wojciech). I could not test it as I don't have a Google Apps Business or Education account. Please [send me a message](https://github.com/inbox/new/nfo) if it works for you.
 
 ## Install
 
@@ -55,9 +57,14 @@ Note that +Net::SMTP#enable_starttls_auto+ is not defined in Ruby 1.8.6.
 
 ## Compatibility
 
-Tested on Ruby MRI 1.8.6, 1.8.7 and 1.9.1. Feel free to send me a message if you tested this code with other implementations of Ruby.
+Tested on Ruby MRI 1.8.6, 1.8.7, 1.9.1 and 1.9.2. Feel free to send me a message if you tested this code with other implementations of Ruby.
 
 The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
+
+## History
+
+* 0.2.0 SMTP support
+* 0.1.0 Initial release with IMAP support and 3-legged OAuth
 
 ## Note on Patches/Pull Requests
  
@@ -68,6 +75,10 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
+
+## Contact me
+
+http://about.me/nfo
 
 ## Copyright
 
