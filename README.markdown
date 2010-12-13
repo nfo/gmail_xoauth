@@ -16,6 +16,8 @@ For testing, you can generate and validate your OAuth tokens thanks to the aweso
 
     $ python xoauth.py --generate_oauth_token --user=myemail@gmail.com
 
+Or if you want some webapp code, check the [gmail-oauth-sinatra](https://github.com/nfo/gmail-oauth-sinatra) project.
+
 ### IMAP
 
 For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
