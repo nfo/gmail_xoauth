@@ -63,6 +63,7 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## History
 
+* 0.3.0 Experimental 2-legged OAuth support. [Give some feedback](https://github.com/inbox/new/nfo) !
 * 0.2.0 SMTP support
 * 0.1.0 Initial release with IMAP support and 3-legged OAuth
 
