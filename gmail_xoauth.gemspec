@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "oauth", ">= 0.3.6"
   s.add_development_dependency "shoulda", ">= 0"
  
-  s.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.markdown)
+  s.files        = Dir.glob("{bin,lib,test}/**/*") + %w(LICENSE README.markdown)
   s.require_path = 'lib'
   
   s.rdoc_options = ["--charset=UTF-8"]
