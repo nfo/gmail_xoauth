@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "shoulda", ">= 0"
  
   s.files        = Dir.glob("{bin,lib,test}/**/*") + %w(LICENSE README.markdown)
+  s.files.reject! { |fn| fn.include? "valid_credentials.yml" }
+  
   s.require_path = 'lib'
   
   s.rdoc_options = ["--charset=UTF-8"]
