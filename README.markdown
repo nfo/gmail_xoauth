@@ -2,9 +2,9 @@
 
 Get access to [Gmail IMAP and STMP via OAuth](http://code.google.com/apis/gmail/oauth), using the standard Ruby Net libraries.
 
-The gem supports 3-legged and 2-legged OAuth.
+The gem supports 3-legged OAuth, and 2-legged OAuth for Google Apps Business or Education account owners.
 
-Note: 2-legged OAuth support was coded by [Wojciech Kruszewski](https://github.com/wojciech). I could not test it as I don't have a Google Apps Business or Education account. Please [send me a message](https://github.com/inbox/new/nfo) if it works for you.
+Note: 2-legged OAuth support was added by [Wojciech Kruszewski](https://github.com/wojciech).
 
 ## Install
 
@@ -37,6 +37,16 @@ For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
 
 Note that the [Net::IMAP#login](http://www.ruby-doc.org/core/classes/Net/IMAP.html#M004191) method does not use support custom authenticators, so you have to use the [Net::IMAP#authenticate](http://www.ruby-doc.org/core/classes/Net/IMAP.html#M004190) method.
 
+If you use 2-legged OAuth:
+
+    require 'gmail_xoauth'
+    imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
+    imap.authenticate('XOAUTH', 'myemail@mydomain.com',
+      :two_legged => true,
+      :consumer_key => 'a',
+      :consumer_secret => 'b'
+    )
+
 ### SMTP
 
 For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
@@ -55,6 +65,20 @@ For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
 
 Note that +Net::SMTP#enable_starttls_auto+ is not defined in Ruby 1.8.6.
 
+If you use 2-legged OAuth:
+
+    require 'gmail_xoauth'
+    smtp = Net::SMTP.new('smtp.gmail.com', 587)
+    smtp.enable_starttls_auto
+    secret = {
+    	:two_legged => true,
+      :consumer_key => 'a',
+      :consumer_secret => 'b'
+    }
+    smtp.start('gmail.com', 'myemail@mydomain.com', secret, :xoauth)
+    smtp.finish
+
+
 ## Compatibility
 
 Tested on Ruby MRI 1.8.6, 1.8.7, 1.9.1 and 1.9.2. Feel free to send me a message if you tested this code with other implementations of Ruby.
@@ -63,7 +87,8 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## History
 
-* 0.3.0 Experimental 2-legged OAuth support. [Give some feedback](https://github.com/inbox/new/nfo) !
+* 0.3.1 2-legged OAuth support confirmed by [BobDohnal](https://github.com/BobDohnal)
+* 0.3.0 Experimental 2-legged OAuth support
 * 0.2.0 SMTP support
 * 0.1.0 Initial release with IMAP support and 3-legged OAuth
 
@@ -83,4 +108,4 @@ http://about.me/nfo
 
 ## Copyright
 
-Copyright (c) 2010 Silentale SAS. See LICENSE for details.
+Copyright (c) 2011 Silentale SAS. See LICENSE for details.
