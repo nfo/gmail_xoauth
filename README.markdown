@@ -1,4 +1,4 @@
-# gmail_xoauth
+# gmail_xoauth [![Dependency Status](https://gemnasium.com/nfo/gmail_xoauth.png)](https://gemnasium.com/nfo/gmail_xoauth)
 
 Get access to [Gmail IMAP and STMP via OAuth](http://code.google.com/apis/gmail/oauth), using the standard Ruby Net libraries.
 
