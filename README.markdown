@@ -87,6 +87,7 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## History
 
+* 0.3.2 New email for the maintainer
 * 0.3.1 2-legged OAuth support confirmed by [BobDohnal](https://github.com/BobDohnal)
 * 0.3.0 Experimental 2-legged OAuth support
 * 0.2.0 SMTP support
