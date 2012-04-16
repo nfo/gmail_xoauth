@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.version     = GmailXoauth::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nicolas Fouché"]
-  s.email       = ["nicolas@silentale.com"]
-  s.homepage    = "http://geeks.silentale.com/2010/05/26/gmail-and-oauth-ruby-gem"
+  s.email       = ["nicolas.fouche@gmail.com"]
+  s.homepage    = "https://github.com/nfo/gmail_xoauth"
   s.summary     = %Q{Get access to Gmail IMAP and STMP via OAuth, using the standard Ruby Net libraries}
   s.description = %Q{Get access to Gmail IMAP and STMP via OAuth, using the standard Ruby Net libraries}
  
