@@ -24,60 +24,67 @@ Or if you want some webapp code, check the [gmail-oauth-sinatra](https://github.
 
 For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
 
-    require 'gmail_xoauth'
-    imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
-    imap.authenticate('XOAUTH', 'myemail@gmail.com',
-      :consumer_key => 'anonymous',
-      :consumer_secret => 'anonymous',
-      :token => '4/nM2QAaunKUINb4RrXPC55F-mix_k',
-      :token_secret => '41r18IyXjIvuyabS/NDyW6+m'
-    )
-    messages_count = imap.status('INBOX', ['MESSAGES'])['MESSAGES']
-    puts "Seeing #{messages_count} messages in INBOX"
+```ruby
+require 'gmail_xoauth'
+imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
+imap.authenticate('XOAUTH', 'myemail@gmail.com',
+  :consumer_key => 'anonymous',
+  :consumer_secret => 'anonymous',
+  :token => '4/nM2QAaunKUINb4RrXPC55F-mix_k',
+  :token_secret => '41r18IyXjIvuyabS/NDyW6+m'
+)
+messages_count = imap.status('INBOX', ['MESSAGES'])['MESSAGES']
+puts "Seeing #{messages_count} messages in INBOX"
+```
 
 Note that the [Net::IMAP#login](http://www.ruby-doc.org/core/classes/Net/IMAP.html#M004191) method does not use support custom authenticators, so you have to use the [Net::IMAP#authenticate](http://www.ruby-doc.org/core/classes/Net/IMAP.html#M004190) method.
 
 If you use 2-legged OAuth:
 
-    require 'gmail_xoauth'
-    imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
-    imap.authenticate('XOAUTH', 'myemail@mydomain.com',
-      :two_legged => true,
-      :consumer_key => 'a',
-      :consumer_secret => 'b'
-    )
+```ruby
+require 'gmail_xoauth'
+imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
+imap.authenticate('XOAUTH', 'myemail@mydomain.com',
+  :two_legged => true,
+  :consumer_key => 'a',
+  :consumer_secret => 'b'
+)
+```
 
 ### SMTP
 
 For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
 
-    require 'gmail_xoauth'
-    smtp = Net::SMTP.new('smtp.gmail.com', 587)
-    smtp.enable_starttls_auto
-    secret = {
-      :consumer_key => 'anonymous',
-      :consumer_secret => 'anonymous',
-      :token => '4/nM2QAaunKUINb4RrXPC55F-mix_k',
-      :token_secret => '41r18IyXjIvuyabS/NDyW6+m'
-    }
-    smtp.start('gmail.com', 'myemail@gmail.com', secret, :xoauth)
-    smtp.finish
+```ruby
+require 'gmail_xoauth'
+smtp = Net::SMTP.new('smtp.gmail.com', 587)
+smtp.enable_starttls_auto
+secret = {
+  :consumer_key => 'anonymous',
+  :consumer_secret => 'anonymous',
+  :token => '4/nM2QAaunKUINb4RrXPC55F-mix_k',
+  :token_secret => '41r18IyXjIvuyabS/NDyW6+m'
+}
+smtp.start('gmail.com', 'myemail@gmail.com', secret, :xoauth)
+smtp.finish
+```
 
-Note that +Net::SMTP#enable_starttls_auto+ is not defined in Ruby 1.8.6.
+Note that `Net::SMTP#enable_starttls_auto` is not defined in Ruby 1.8.6.
 
 If you use 2-legged OAuth:
 
-    require 'gmail_xoauth'
-    smtp = Net::SMTP.new('smtp.gmail.com', 587)
-    smtp.enable_starttls_auto
-    secret = {
-    	:two_legged => true,
-      :consumer_key => 'a',
-      :consumer_secret => 'b'
-    }
-    smtp.start('gmail.com', 'myemail@mydomain.com', secret, :xoauth)
-    smtp.finish
-
+```ruby
+require 'gmail_xoauth'
+smtp = Net::SMTP.new('smtp.gmail.com', 587)
+smtp.enable_starttls_auto
+secret = {
+	:two_legged => true,
+  :consumer_key => 'a',
+  :consumer_secret => 'b'
+}
+smtp.start('gmail.com', 'myemail@mydomain.com', secret, :xoauth)
+smtp.finish
+```
 
 ## Compatibility
 
@@ -110,3 +117,4 @@ http://about.me/nfo
 ## Copyright
 
 Copyright (c) 2011 Silentale SAS. See LICENSE for details.
+
