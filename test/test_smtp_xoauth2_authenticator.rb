@@ -31,6 +31,6 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
       smtp.start('gmail.com', VALID_CREDENTIALS[:email], secret, :xoauth2)
     end
   ensure
-    smtp.finish if smtp.started?
+    smtp.finish if smtp && smtp.started?
   end
 end
