@@ -114,7 +114,6 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 http://about.me/nfo
 
-## Copyright
+## License
 
-Copyright (c) 2011 Silentale SAS. See LICENSE for details.
-
+See LICENSE for details.
