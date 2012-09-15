@@ -26,7 +26,8 @@ VALID_CREDENTIALS = begin
 rescue Errno::ENOENT
   STDERR.puts %(
 Warning: some tests are disabled because they require valid credentials. To enable them, create a file \"test/valid_credentials.yml\".
-It should contain valid OAuth tokens. Valid tokens can be generated thanks to \"xoauth.py\":http://code.google.com/p/google-mail-xoauth-tools/.
+It should contain valid OAuth tokens. Valid tokens oauth tokens can be generated thanks to \"xoauth.py\":http://code.google.com/p/google-mail-xoauth-tools/.
+It should also ontain a valid OAuth2 access token. Valid tokens oauth2 tokens can be generated thanks to \"oauth2.py\":http://code.google.com/p/google-mail-oauth2-tools//. Note that oauth2 access tokens are time limited (an hour in my experience).
 Of course, this file is .gitignored. Template:
 
 ---
@@ -35,6 +36,7 @@ Of course, this file is .gitignored. Template:
 :consumer_secret: anonymous # "anonymous" is a valid value for testing
 :token: 1/nE2xBCDOU0429bTeJySE11kRE95qzKQNlfTaaBcDeFg
 :token_secret: 123Z/bMsi9fFhN6qHFWOabcd
+:oauth2_token: ya29.AHES6ZTIpsLuSyMwnh-3C40WWcuiOe4N7he0a8xnkvDk_6Q_6yUg7E
 
 )
   false
