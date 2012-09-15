@@ -4,7 +4,7 @@ module GmailXoauth
   private
     
     #
-    # Builds the "oauth protocol parameter string". See http://code.google.com/apis/gmail/oauth/protocol.html#sasl
+    # Builds the "oauth protocol parameter string". See https://developers.google.com/google-apps/gmail/oauth_protocol#sasl_initial_client_request
     # 
     #   +request_url+ https://mail.google.com/mail/b/user_name@gmail.com/{imap|smtp}/
     #   +oauth_params+ contains the following keys:
@@ -45,7 +45,7 @@ module GmailXoauth
       oauth_request_params.map { |k,v| "#{k}=\"#{OAuth::Helper.escape(v)}\"" }.sort.join(',')
     end
 
-    # See http://code.google.com/apis/gmail/oauth/protocol.html#sasl
+    # See https://developers.google.com/google-apps/gmail/oauth_protocol#sasl_initial_client_request
     def build_sasl_client_request(request_url, oauth_string)
       'GET ' + request_url + ' ' + oauth_string
     end

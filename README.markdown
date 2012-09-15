@@ -1,18 +1,51 @@
 # gmail_xoauth [![Dependency Status](https://gemnasium.com/nfo/gmail_xoauth.png)](https://gemnasium.com/nfo/gmail_xoauth)
 
-Get access to [Gmail IMAP and STMP via OAuth](http://code.google.com/apis/gmail/oauth), using the standard Ruby Net libraries.
+Get access to [Gmail IMAP and STMP via OAuth2](https://developers.google.com/google-apps/gmail/xoauth2_protocol) and [OAuth 1.0a](https://developers.google.com/google-apps/gmail/oauth_protocol), using the standard Ruby Net libraries.
 
 The gem supports 3-legged OAuth, and 2-legged OAuth for Google Apps Business or Education account owners.
-
-Note: 2-legged OAuth support was added by [Wojciech Kruszewski](https://github.com/wojciech).
 
 ## Install
 
     $ gem install gmail_xoauth
 
-## Usage
+## Usage for OAuth 2.0
 
-### Get your OAuth tokens
+### Get your OAuth 2.0 tokens
+
+You can generate and validate your OAuth 2.0 tokens thanks to the [oauth2.py tool](http://code.google.com/p/google-mail-oauth2-tools/wiki/OAuth2DotPyRunThrough).
+
+Create your API project in the [Google APIs console](https://code.google.com/apis/console/), from the "API Access" tab.
+
+    $ python oauth2.py --generate_oauth2_token --client_id=364545978226.apps.googleusercontent.com --client_secret=zNrNsBzOOnQy8_O-8LkofeTR
+
+### IMAP OAuth 2.0
+
+```ruby
+require 'gmail_xoauth'
+imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
+imap.authenticate('XOAUTH2', 'myemail@gmail.com', my_oauth2_token)
+messages_count = imap.status('INBOX', ['MESSAGES'])['MESSAGES']
+puts "Seeing #{messages_count} messages in INBOX"
+```
+
+### SMTP OAuth 2.0
+
+```ruby
+require 'gmail_xoauth'
+smtp = Net::SMTP.new('smtp.gmail.com', 587)
+smtp.enable_starttls_auto
+secret = {
+  :token => my_oauth2_token,
+}
+smtp.start('gmail.com', 'myemail@gmail.com', secret, :xoauth2)
+smtp.finish
+```
+
+## Usage for OAuth 1.0a
+
+== *[OAuth 1.0 has been officially deprecated as of April 20, 2012](https://developers.google.com/google-apps/gmail/oauth_protocol)*. ==
+
+### Get your OAuth 1.0a tokens
 
 For testing, you can generate and validate your OAuth tokens thanks to the awesome [xoauth.py tool](http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough).
 
@@ -20,7 +53,7 @@ For testing, you can generate and validate your OAuth tokens thanks to the aweso
 
 Or if you want some webapp code, check the [gmail-oauth-sinatra](https://github.com/nfo/gmail-oauth-sinatra) project.
 
-### IMAP
+### IMAP 3-legged OAuth 1.0a
 
 For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
 
@@ -39,7 +72,7 @@ puts "Seeing #{messages_count} messages in INBOX"
 
 Note that the [Net::IMAP#login](http://www.ruby-doc.org/core/classes/Net/IMAP.html#M004191) method does not use support custom authenticators, so you have to use the [Net::IMAP#authenticate](http://www.ruby-doc.org/core/classes/Net/IMAP.html#M004190) method.
 
-If you use 2-legged OAuth:
+### IMAP 2-legged OAuth 1.0a
 
 ```ruby
 require 'gmail_xoauth'
@@ -51,7 +84,7 @@ imap.authenticate('XOAUTH', 'myemail@mydomain.com',
 )
 ```
 
-### SMTP
+### SMTP 3-legged OAuth 1.0a
 
 For your tests, Gmail allows to set 'anonymous' as the consumer key and secret.
 
@@ -71,7 +104,7 @@ smtp.finish
 
 Note that `Net::SMTP#enable_starttls_auto` is not defined in Ruby 1.8.6.
 
-If you use 2-legged OAuth:
+### SMTP 2-legged OAuth 1.0a
 
 ```ruby
 require 'gmail_xoauth'
@@ -88,15 +121,16 @@ smtp.finish
 
 ## Compatibility
 
-Tested on Ruby MRI 1.8.6, 1.8.7, 1.9.1 and 1.9.2. Feel free to send me a message if you tested this code with other implementations of Ruby.
+Tested on Ruby MRI 1.8.6, 1.8.7, 1.9.1, 1.9.2 and 1.9.3. Feel free to send me a message if you tested this code with other implementations of Ruby.
 
 The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## History
 
+* 0.4.0 [XOAUTH2](https://developers.google.com/google-apps/gmail/xoauth2_protocol) support, thanks to @glongman
 * 0.3.2 New email for the maintainer
-* 0.3.1 2-legged OAuth support confirmed by [BobDohnal](https://github.com/BobDohnal)
-* 0.3.0 Experimental 2-legged OAuth support
+* 0.3.1 2-legged OAuth support confirmed by @BobDohnal
+* 0.3.0 Experimental 2-legged OAuth support, thanks to @wojciech
 * 0.2.0 SMTP support
 * 0.1.0 Initial release with IMAP support and 3-legged OAuth
 
