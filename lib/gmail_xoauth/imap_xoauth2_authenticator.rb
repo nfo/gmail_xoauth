@@ -4,16 +4,16 @@ module GmailXoauth
   class ImapXoauth2Authenticator
     
     def process(data)
-      build_oauth2_string(@user, @password)
+      build_oauth2_string(@user, @oauth2_token)
     end
     
   private
     
     # +user+ is an email address: roger@gmail.com
-    # +password+ is a hash of oauth parameters, see +build_oauth_string+
-    def initialize(user, password)
+    # +oauth2_token+ is the OAuth2 token
+    def initialize(user, oauth2_token)
       @user = user
-      @password = password
+      @oauth2_token = oauth2_token
     end
     
     include OauthString

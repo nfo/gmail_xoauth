@@ -13,7 +13,7 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
     smtp = Net::SMTP.new('smtp.gmail.com', 587)
     smtp.enable_starttls_auto
     assert_raise(Net::SMTPAuthenticationError) do
-      smtp.start('gmail.com', 'roger@moore.com', {:token => 'a'}, :xoauth2)
+      smtp.start('gmail.com', 'roger@moore.com', 'a', :xoauth2)
     end
   end
   
@@ -23,12 +23,8 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
     smtp = Net::SMTP.new('smtp.gmail.com', 587)
     smtp.enable_starttls_auto
     
-    secret = {
-      :token => VALID_CREDENTIALS[:oauth2_token],
-    }
-    
     assert_nothing_raised do
-      smtp.start('gmail.com', VALID_CREDENTIALS[:email], secret, :xoauth2)
+      smtp.start('gmail.com', VALID_CREDENTIALS[:email], VALID_CREDENTIALS[:oauth2_token], :xoauth2)
     end
   ensure
     smtp.finish if smtp && smtp.started?

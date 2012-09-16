@@ -54,10 +54,9 @@ module GmailXoauth
     # Builds the "oauth2 protocol authentication string". See https://developers.google.com/google-apps/gmail/xoauth2_protocol
     # 
     #   +user+ is an email address: roger@gmail.com
-    #   +oauth_params+ contains the following keys:
-    #     * :token (mandatory)
-    def build_oauth2_string(user, oauth_params = {})
-      "user=%s\1auth=Bearer %s\1\1".encode("us-ascii") % [user, oauth_params[:token]]
+    #   +oauth2_token+ is the oauth2 token
+    def build_oauth2_string(user, oauth2_token)
+      "user=%s\1auth=Bearer %s\1\1".encode("us-ascii") % [user, oauth2_token]
     end
     
   end
