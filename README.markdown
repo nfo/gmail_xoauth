@@ -124,6 +124,7 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## History
 
+* 0.4.1 Changed to way to give the OAuth 2.0 token, see https://github.com/nfo/gmail_xoauth/commit/b7b936cfb094c2fc9b8e9e48526906191423cb88
 * 0.4.0 [XOAUTH2](https://developers.google.com/google-apps/gmail/xoauth2_protocol) support, thanks to [glongman](https://github.com/glongman)
 * 0.3.2 New email for the maintainer
 * 0.3.1 2-legged OAuth support confirmed by [BobDohnal](https://github.com/BobDohnal)
