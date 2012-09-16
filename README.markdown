@@ -23,7 +23,7 @@ Create your API project in the [Google APIs console](https://code.google.com/api
 ```ruby
 require 'gmail_xoauth'
 imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
-imap.authenticate('XOAUTH2', 'myemail@gmail.com', my_oauth2_token)
+imap.authenticate('XOAUTH2', 'myemail@gmail.com', :token => my_oauth2_token)
 messages_count = imap.status('INBOX', ['MESSAGES'])['MESSAGES']
 puts "Seeing #{messages_count} messages in INBOX"
 ```
