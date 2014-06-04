@@ -14,9 +14,11 @@ The gem supports 3-legged OAuth, and 2-legged OAuth for Google Apps Business or 
 
 You can generate and validate your OAuth 2.0 tokens thanks to the [oauth2.py tool](http://code.google.com/p/google-mail-oauth2-tools/wiki/OAuth2DotPyRunThrough).
 
-Create your API project in the [Google APIs console](https://code.google.com/apis/console/), from the "API Access" tab.
+Create your API project in the [Google APIs console](https://code.google.com/apis/console/), from the menu "APIs and auth > Credentials". Click on "Create new Client ID", choose "Installed Application" and "Other".
 
-    $ python oauth2.py --generate_oauth2_token --client_id=364545978226.apps.googleusercontent.com --client_secret=zNrNsBzOOnQy8_O-8LkofeTR
+Then go to the menu "APIs and auth > Consent screen" and enter an email address and product name.
+
+    $ python oauth2.py --generate_oauth2_token --client_id=423906513574-o9v6kqt89lefrbfv1f3394u9rebfgv6n.apps.googleusercontent.com --client_secret=5SfdvZsYagblukE5VAhERjxZ
 
 ### IMAP OAuth 2.0
 
@@ -132,7 +134,7 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 * 0.1.0 Initial release with IMAP support and 3-legged OAuth
 
 ## Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
