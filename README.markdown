@@ -120,7 +120,7 @@ smtp.finish
 
 ## Compatibility
 
-Tested on Ruby MRI 1.8.6, 1.8.7, 1.9.1, 1.9.2 and 1.9.3. Feel free to send me a message if you tested this code with other implementations of Ruby.
+Tested on Ruby MRI 1.8.6, 1.8.7, 1.9.x and 2.1.x. Feel free to send me a message if you tested this code with other implementations of Ruby.
 
 The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
