@@ -22,14 +22,3 @@ rescue LoadError
 end
 
 task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  require 'gmail_xoauth/version'
-  version = GmailXoauth::VERSION
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "gmail_xoauth #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
