@@ -1,7 +1,8 @@
 
-
-
-
+language: c
+compiler:
+  - gcc
+  - clang
 <!DOCTYPE html>
 <html lang="en" class="">
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
@@ -4908,7 +4909,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       Something went wrong with that request. Please try again.
     </div>
 
-
+language: c
+compiler:
+  - gcc
+  - clang
+# Change this to your needs
+script: ./configure && make
       <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-87b2616c03e3e9e84d9d17109410789222438c5b882d9b62aec5b0f17f3adbbb.js" type="text/javascript"></script>
       <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github-dcbca56a8b0b76e97f73888eac78395d7cc0d184889ae628d7e68333c9ec2b70.js" type="text/javascript"></script>
       
