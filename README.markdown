@@ -20,10 +20,34 @@ Then go to the menu "APIs and auth > Consent screen" and enter an email address 
 
     $ python oauth2.py --generate_oauth2_token --client_id=423906513574-o9v6kqt89lefrbfv1f3394u9rebfgv6n.apps.googleusercontent.com --client_secret=5SfdvZsYagblukE5VAhERjxZ
 
+#### Refreshing Access Tokens
+
+The command above will give you both an access token and a refresh
+token; the access token can be used by itself in the examples below, but
+it expires after an hour.
+
+You can also use the refresh token combined with the client ID and
+client secret as found in the Google APIs console above to build an
+XoauthRefreshableToken:
+
+```ruby
+my_oauth2_token = GmailXoauth::Xoauth2RefreshableToken.new(
+  VALID_CLIENT_ID,
+  VALID_CLIENT_SECRET,
+  VALID_REFRESH_TOKEN
+)
+```
+
+The refreshable token can be used in place of the access token, and will
+make an HTTP request to get a new access token as needed.  Refresh
+tokens last much longer than access tokens.
+
 ### IMAP OAuth 2.0
 
 ```ruby
 require 'gmail_xoauth'
+
+my_oauth2_token = 'access_token as string or instance of GmailXoauth::Xoauth2RefreshableToken'
 imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
 imap.authenticate('XOAUTH2', 'myemail@gmail.com', my_oauth2_token)
 messages_count = imap.status('INBOX', ['MESSAGES'])['MESSAGES']
@@ -34,6 +58,8 @@ puts "Seeing #{messages_count} messages in INBOX"
 
 ```ruby
 require 'gmail_xoauth'
+
+my_oauth2_token = 'access_token as string or instance of GmailXoauth::Xoauth2RefreshableToken'
 smtp = Net::SMTP.new('smtp.gmail.com', 587)
 smtp.enable_starttls_auto
 smtp.start('gmail.com', 'myemail@gmail.com', my_oauth2_token, :xoauth2)
