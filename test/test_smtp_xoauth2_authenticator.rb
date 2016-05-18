@@ -55,4 +55,21 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
   ensure
     smtp.finish if smtp && smtp.started?
   end
+
+  def test_authenticate_with_valid_refresh
+    return unless VALID_CREDENTIALS
+
+    oauth2_refreshable_token = GmailXoauth::Xoauth2RefreshableToken.new(
+      VALID_CREDENTIALS[:client_id],
+      VALID_CREDENTIALS[:client_secret],
+      VALID_CREDENTIALS[:refresh_token]
+    )
+
+    smtp = Net::SMTP.new('smtp.gmail.com', 587)
+    smtp.enable_starttls_auto
+
+    assert_nothing_raised do
+      smtp.start('gmail.com', VALID_CREDENTIALS[:email], oauth2_refreshable_token, :xoauth2)
+    end
+  end
 end
