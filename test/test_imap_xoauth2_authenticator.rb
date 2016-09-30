@@ -29,4 +29,23 @@ class TestImapXoauth2Authenticator < Test::Unit::TestCase
   ensure
     imap.disconnect if imap
   end
+
+  def test_authenticate_with_valid_refresh
+    return unless VALID_CREDENTIALS
+
+    imap = Net::IMAP.new('imap.gmail.com', 993, usessl = true, certs = nil, verify = false)
+
+    oauth2_refreshable_token = GmailXoauth::Xoauth2RefreshableToken.new(
+      VALID_CREDENTIALS[:client_id],
+      VALID_CREDENTIALS[:client_secret],
+      VALID_CREDENTIALS[:refresh_token]
+    )
+
+    imap.authenticate('XOAUTH2', VALID_CREDENTIALS[:email], oauth2_refreshable_token)
+    mailboxes = imap.list('', '*')
+    assert_instance_of Array, mailboxes
+    assert_instance_of Net::IMAP::MailboxList, mailboxes.first
+  ensure
+    imap.disconnect if imap
+  end
 end
