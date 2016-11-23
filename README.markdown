@@ -1,6 +1,6 @@
 # gmail_xoauth [![Gem Version](https://badge.fury.io/rb/gmail_xoauth.png)](http://badge.fury.io/rb/gmail_xoauth) [![Dependency Status](https://gemnasium.com/nfo/gmail_xoauth.png)](https://gemnasium.com/nfo/gmail_xoauth)
 
-Get access to [Gmail IMAP and STMP via OAuth2](https://developers.google.com/google-apps/gmail/xoauth2_protocol) and [OAuth 1.0a](https://developers.google.com/google-apps/gmail/oauth_protocol), using the standard Ruby Net libraries.
+Get access to [Gmail IMAP and SMTP via OAuth2](https://developers.google.com/google-apps/gmail/xoauth2_protocol) and [OAuth 1.0a](https://developers.google.com/google-apps/gmail/oauth_protocol), using the standard Ruby Net libraries.
 
 The gem supports 3-legged OAuth, and 2-legged OAuth for Google Apps Business or Education account owners.
 
