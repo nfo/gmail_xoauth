@@ -40,8 +40,10 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
     smtp = Net::SMTP.new('smtp.gmail.com', 587)
 
     # Stub return from initial "AUTH XOAUTH2" request as well as the empty line sent to get final error
-    smtp.stubs(:send_xoauth2).returns(Net::SMTP::Response.parse("334 eyJzdGF0dXMiOiI0MDAiLCJzY2hlbWVzIjoiQmVhcmVyIiwic2NvcGUiOiJodHRwczovL21haWwuZ29vZ2xlLmNvbS8ifQ=="))
-    smtp.stubs(:get_final_status).returns(Net::SMTP::Response.parse("454 4.7.0 Too many login attempts, please try again later. j63sm3521185itj.19 - gsmtp"))
+    unless defined?(Net::SMTP::Authenticator)
+      smtp.stubs(:send_xoauth2).returns(Net::SMTP::Response.parse("334 eyJzdGF0dXMiOiI0MDAiLCJzY2hlbWVzIjoiQmVhcmVyIiwic2NvcGUiOiJodHRwczovL21haWwuZ29vZ2xlLmNvbS8ifQ=="))
+      smtp.stubs(:get_final_status).returns(Net::SMTP::Response.parse("454 4.7.0 Too many login attempts, please try again later. j63sm3521185itj.19 - gsmtp"))
+    end
 
     smtp.enable_starttls_auto
 
@@ -50,8 +52,12 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
       smtp.start('gmail.com', 'roger@moore.com', 'a', :xoauth2)
     end
 
-    # ...and that the 334 is not passed back to the caller.
-    assert_equal("454 4.7.0 Too many login attempts, please try again later. j63sm3521185itj.19 - gsmtp", ex.message)
+    if defined?(Net::SMTP::Authenticator)
+      assert_equal("535-5.7.8 Username and Password not accepted. Learn more at\n", ex.message)
+    else
+      # ...and that the 334 is not passed back to the caller.
+      assert_equal("454 4.7.0 Too many login attempts, please try again later. j63sm3521185itj.19 - gsmtp", ex.message)
+    end
   ensure
     smtp.finish if smtp && smtp.started?
   end

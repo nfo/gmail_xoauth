@@ -6,9 +6,13 @@ class TestSmtpXoauthAuthenticator < Test::Unit::TestCase
   end
   
   def test_smtp_authenticator_is_enabled
-    assert Net::SMTP.new(nil).respond_to?(:auth_xoauth), 'The Net::SMTP class should define the method :auth_xoauth'
+    if defined?(Net::SMTP::Authenticator)
+      assert_not_nil Net::SMTP::Authenticator.auth_class(:xoauth), 'The Net::SMTP class should define the method :auth_xoauth'
+    else
+      assert Net::SMTP.new(nil).respond_to?(:auth_xoauth), 'The Net::SMTP class should define the method :auth_xoauth'
+    end
   end
-  
+
   def test_authenticate_with_invalid_credentials
     smtp = Net::SMTP.new('smtp.gmail.com', 587)
     smtp.enable_starttls_auto
