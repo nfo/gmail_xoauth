@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gmail_xoauth (0.4.2)
+    gmail_xoauth (0.4.3)
       oauth (>= 0.3.6)
 
 GEM

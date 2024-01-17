@@ -18,6 +18,8 @@ coverage
 rdoc
 pkg
 *.gem
+.bundle
+vendor
 
 ## PROJECT::SPECIFIC
 test/valid_credentials.yml

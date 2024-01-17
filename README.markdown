@@ -126,6 +126,7 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## History
 
+* 0.4.3 Maintenance: Use Net::IMAP::SASL.add_authenticator to silence deprecation warning, thanks to [mantas](https://github.com/mantas)
 * 0.4.2 SMTP: on 3xx response to 'AUTH XOAUTH2' send CR-LF to get actual error, thanks to [rafalyesware](https://github.com/rafalyesware)
 * 0.4.1 [XOAUTH2](https://developers.google.com/google-apps/gmail/xoauth2_protocol) support, thanks to [glongman](https://github.com/glongman)
 * 0.3.2 New email for the maintainer
@@ -146,7 +147,7 @@ The only external dependency is the [oauth gem](http://rubygems.org/gems/oauth).
 
 ## Contact me
 
-http://about.me/nfo
+https://nicolasfouche.com
 
 ## License
 
