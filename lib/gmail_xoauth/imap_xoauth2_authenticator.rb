@@ -21,4 +21,8 @@ module GmailXoauth
   end
 end
 
-Net::IMAP.add_authenticator('XOAUTH2', GmailXoauth::ImapXoauth2Authenticator)
+if Net::IMAP.const_defined?('SASL') && Net::IMAP::SASL.respond_to?(:add_authenticator)
+  Net::IMAP::SASL.add_authenticator('XOAUTH2', GmailXoauth::ImapXoauth2Authenticator)
+else
+  Net::IMAP.add_authenticator('XOAUTH2', GmailXoauth::ImapXoauth2Authenticator)
+end
